@@ -8,7 +8,7 @@ I used this design from UpLabs: https://www.uplabs.com/posts/pizza-store-apps
 
 ## :camera_flash: Screenshots
 <!-- You can add more screenshots here if you like -->
-<img src="/image/image_1.png" width="260">
+<img src="/images/image_1.png" width="260">
 
 ## License
 ```
