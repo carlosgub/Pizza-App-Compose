@@ -1,4 +1,4 @@
-# Puppy App :rocket:
+# Pizza App Compose :rocket:
 ## :scroll: Description
 Mock for Pizza App, this is currently in construccion
 
