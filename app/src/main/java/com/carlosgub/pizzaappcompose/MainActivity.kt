@@ -20,6 +20,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
@@ -27,13 +29,13 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.carlosgub.pizzaappcompose.data.DataDummy
 import com.carlosgub.pizzaappcompose.model.Pizza
-import com.carlosgub.pizzaappcompose.ui.theme.PizzaAppComposeTheme
-import com.carlosgub.pizzaappcompose.ui.theme.coral100
-import com.carlosgub.pizzaappcompose.ui.theme.red100
+import com.carlosgub.pizzaappcompose.ui.theme.*
 
 @ExperimentalComposeUiApi
 class MainActivity : AppCompatActivity() {
@@ -100,7 +102,8 @@ private fun CreateIcon(iconResource: Painter, modifier: Modifier = Modifier) {
     Icon(
         painter = iconResource,
         contentDescription = null,
-        modifier = modifier
+        modifier = modifier,
+        tint = Color.White,
     )
 }
 
@@ -125,10 +128,16 @@ fun Search(modifier: Modifier = Modifier) {
     val (query, setQuery) = remember { mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
     TextField(
-        label = {
+        placeholder = {
             Text(
                 text = stringResource(id = R.string.search_hint),
-                style = TextStyle(color = Color(0xFFC7C7C7))
+                style = TextStyle(color = Color.Black)
+            )
+        },
+        trailingIcon = {
+            Image(
+                painter = painterResource(id = R.drawable.ic_search_red),
+                contentDescription = "search"
             )
         },
         modifier = modifier
@@ -137,16 +146,19 @@ fun Search(modifier: Modifier = Modifier) {
             .padding(top = 12.dp, bottom = 16.dp, start = 12.dp, end = 12.dp)
             .fillMaxWidth()
             .clip(RoundedCornerShape(14.dp))
-            .background(Color.Transparent),
+            .focusModifier()
+            .background(Color.White),
         value = query,
         onValueChange = {
             setQuery(it)
         },
         maxLines = 1,
         keyboardOptions = KeyboardOptions.Default.copy(imeAction = androidx.compose.ui.text.input.ImeAction.Done),
-        keyboardActions = KeyboardActions(onDone = {
-            keyboardController?.hideSoftwareKeyboard()
-        })
+        keyboardActions = KeyboardActions(
+            onDone = {
+                keyboardController?.hideSoftwareKeyboard()
+            },
+        )
     )
 }
 
@@ -155,14 +167,28 @@ fun TopMenu() {
     Column {
         Row(
             modifier = Modifier
-                .padding(top = 12.dp, start = 8.dp, end = 8.dp)
+                .padding(top = 12.dp, start = 12.dp, end = 8.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
                 text = "Top Menu",
                 modifier = Modifier
-                    .weight(1f)
+                    .weight(1f),
+                style = MaterialTheme.typography.h6.copy(
+                    color = MaterialTheme.colors.primary
+                )
             )
-            Text(text = "See all")
+            OutlinedButton(
+                onClick = {},
+                border = BorderStroke(0.dp, Color.Transparent)
+            ) {
+                Text(
+                    text = "See all",
+                    style = MaterialTheme.typography.caption.copy(
+                        color = Gray100
+                    )
+                )
+            }
         }
         LazyRow {
             items(DataDummy.getTopMenuPizza().toList()) {
@@ -178,31 +204,52 @@ fun TopMenu() {
 fun PizzaTopMenuRow(pizza: Pizza) {
     Card(
         shape = RoundedCornerShape(16.dp),
-        backgroundColor = coral100,
+        backgroundColor = Coral100,
         modifier = Modifier
-            .padding(vertical = 12.dp, horizontal = 6.dp)
+            .padding(vertical = 12.dp, horizontal = 12.dp)
             .size(200.dp)
     ) {
         Column(
             modifier = Modifier
-                .padding(8.dp)
+                .padding(all = 8.dp)
         ) {
-            val pizzaImage = painterResource(id = pizza.image)
-            Image(
-                painter = pizzaImage,
-                contentDescription = null,
-                contentScale = ContentScale.FillHeight,
+            Column(
                 modifier = Modifier
-                    .padding(12.dp)
-                    .size(height = 80.dp, width = 200.dp)
-                    .fillMaxWidth()
-            )
-            Text(text = pizza.name)
-            Text(text = pizza.category)
+                    .weight(1f)
+            ) {
+                val pizzaImage = painterResource(id = pizza.image)
+                Image(
+                    painter = pizzaImage,
+                    contentDescription = null,
+                    contentScale = ContentScale.FillHeight,
+                    modifier = Modifier
+                        .padding(12.dp)
+                        .size(height = 80.dp, width = 200.dp)
+                        .fillMaxWidth()
+                )
+                Text(
+                    text = pizza.name,
+                    style = MaterialTheme.typography.body2.copy(
+                        color = MaterialTheme.colors.primary,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+                Text(
+                    text = pizza.category,
+                    style = MaterialTheme.typography.caption.copy(
+                        color = Gray100
+                    ),
+                    modifier = Modifier
+                        .padding(top = 4.dp)
+                )
+            }
             Row(verticalAlignment = Alignment.CenterVertically) {
                 val price = stringResource(R.string.format_price, pizza.price)
                 Text(
                     text = price,
+                    style = MaterialTheme.typography.body2.copy(
+                        fontWeight = FontWeight.Bold
+                    ),
                     modifier = Modifier
                         .weight(1f)
                 )
@@ -223,10 +270,12 @@ fun HotPromo() {
     Column {
         Row(
             modifier = Modifier
-                .padding(start = 8.dp, end = 8.dp)
+                .padding(start = 12.dp, end = 8.dp)
         ) {
             Text(
-                text = "Hot Promo!"
+                text = "Hot Promo!",
+                color = MaterialTheme.colors.primary,
+                style = MaterialTheme.typography.h6
             )
         }
         PizzaHotPromo()
@@ -237,10 +286,11 @@ fun HotPromo() {
 fun PizzaHotPromo() {
     Card(
         shape = RoundedCornerShape(16.dp),
-        backgroundColor = red100,
+        backgroundColor = Red100,
         modifier = Modifier
-            .padding(vertical = 12.dp, horizontal = 6.dp)
+            .padding(vertical = 12.dp, horizontal = 12.dp)
             .fillMaxWidth()
+            .size(160.dp)
     ) {
         Row(
             modifier = Modifier
@@ -252,29 +302,90 @@ fun PizzaHotPromo() {
                 contentDescription = null,
                 contentScale = ContentScale.FillHeight,
                 modifier = Modifier
-                    .padding(12.dp)
                     .size(height = 160.dp, width = 160.dp)
             )
-            Column(
+            ConstraintLayout(
                 modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight()
-                    .align(Alignment.CenterVertically)
-                    .weight(1f)
             ) {
+                val (name, category, daysLeft, price) = createRefs()
                 Text(
-                    text = "Pizza Beef Cheese"
+                    text = "Pizza Beef Cheese",
+                    style = MaterialTheme.typography.body2.copy(
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold
+                    ),
+                    modifier = Modifier
+                        .constrainAs(name) {
+                            top.linkTo(parent.top, margin = 6.dp)
+                        }
                 )
                 Text(
-                    text = "Pizza"
+                    text = "Pizza",
+                    style = MaterialTheme.typography.caption.copy(
+                        color = Color.White
+                    ),
+                    modifier = Modifier
+                        .constrainAs(category) {
+                            top.linkTo(name.bottom, margin = 4.dp)
+                        }
                 )
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    val price = stringResource(R.string.format_price, 5.98)
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .constrainAs(daysLeft) {
+                            top.linkTo(category.bottom, margin = 4.dp)
+                        }
+                ) {
+                    CreateIcon(
+                        iconResource = painterResource(id = R.drawable.ic_clock),
+                        modifier = Modifier
+                            .size(12.dp)
+                    )
                     Text(
-                        text = price,
+                        text = "3 days left",
+                        style = MaterialTheme.typography.body2.copy(
+                            color = Color.White,
+                            fontWeight = FontWeight.Medium
+                        ),
+                        modifier = Modifier
+                            .padding(top = 4.dp, start = 4.dp)
+                    )
+                }
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .constrainAs(price) {
+                            bottom.linkTo(parent.bottom)
+                        }
+                        .fillMaxWidth()
+                        .padding(top = 4.dp, end = 8.dp, bottom = 12.dp)
+                ) {
+                    Row(
                         modifier = Modifier
                             .weight(1f)
-                    )
+                    ) {
+//                        val price = stringResource(R.string.format_price, 7.98)
+//                        Text(
+//                            text = price,
+//                            style = MaterialTheme.typography.body2.copy(
+//                                color = Gray100,
+//                                fontWeight = FontWeight.Bold
+//                            )
+//                        )
+                        val priceDiscount = stringResource(R.string.format_price, 5.98)
+                        Text(
+                            text = priceDiscount,
+                            style = MaterialTheme.typography.body2.copy(
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold
+                            ),
+                            modifier = Modifier
+                                .padding(start = 4.dp)
+                        )
+                    }
                     val button = painterResource(id = R.drawable.ic_button_plus_white)
                     Image(
                         painter = button,

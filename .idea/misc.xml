@@ -7,8 +7,14 @@
         <entry key="../../../../layout/compose-model-1614486677013.xml" value="0.375" />
         <entry key="../../../../layout/compose-model-1614486972260.xml" value="0.3657094594594595" />
         <entry key="../../../../layout/compose-model-1614492632510.xml" value="0.5" />
+        <entry key="../../../../layout/compose-model-1614537205106.xml" value="0.2039695945945946" />
+        <entry key="../../../../layout/compose-model-1614538752254.xml" value="0.375" />
         <entry key="app/src/main/res/drawable-v24/ic_button_plus.xml" value="0.25729166666666664" />
+        <entry key="app/src/main/res/drawable-v24/ic_button_plus_white.xml" value="0.24479166666666666" />
         <entry key="app/src/main/res/drawable-v24/ic_pizza_icon.xml" value="0.3814814814814815" />
+        <entry key="app/src/main/res/drawable-v24/ic_white_heart.xml" value="0.2682291666666667" />
+        <entry key="app/src/main/res/drawable/ic_clock.xml" value="0.25729166666666664" />
+        <entry key="app/src/main/res/drawable/ic_search_red.xml" value="0.25729166666666664" />
       </map>
     </option>
   </component>
