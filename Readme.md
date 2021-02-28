@@ -3,22 +3,22 @@
 Mock for Pizza App, this is currently in construccion
 
 
-## :bulb: Motivation and Context
+## Credits :pencil2:
 I used this design from UpLabs: https://www.uplabs.com/posts/pizza-store-apps
 
-## :camera_flash: Screenshots
+## Screenshots :iphone:
 <!-- You can add more screenshots here if you like -->
 <img src="/images/image_1.png" width="260">
 
 
-## Dependencies
+## Dependencies :clipboard:
 
 - androidx.compose.ui:ui[version: '1.0.0-beta01'](https://mvnrepository.com/artifact/androidx.compose.ui/ui)
 - androidx.compose.ui:ui-tooling [version: '1.0.0-beta01'](https://mvnrepository.com/artifact/androidx.compose.ui/ui-tooling)
 - androidx.compose.material:material [version: '1.0.0-beta01'](https://mvnrepository.com/artifact/androidx.compose.material/material)
 - androidx.constraintlayout:constraintlayout-compose [version: '1.0.0-alpha03'](https://mvnrepository.com/artifact/androidx.constraintlayout/constraintlayout-compose)
 
-## References
+## References :blue_book:
 
 
 - Android Compose Pathway https://developer.android.com/courses/pathways/compose
