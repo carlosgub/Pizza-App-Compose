@@ -1,16 +1,14 @@
 # Puppy App :rocket:
 ## :scroll: Description
-An app to adopt a pet for make your life more happier :)
+Mock for Pizza App, this is currently in construccion
 
 
 ## :bulb: Motivation and Context
-I used this design from Dribble as motivation: https://dribbble.com/shots/11779683-PET-ADOPTION-APP
-Thanks to Anurag to make a great design!
-
+I used this design from UpLabs: https://www.uplabs.com/posts/pizza-store-apps
 
 ## :camera_flash: Screenshots
 <!-- You can add more screenshots here if you like -->
-<img src="/results/screenshot_1.png" width="260">&emsp;<img src="/results/screenshot_2.png" width="260">
+<img src="/image/image_1.png" width="260">
 
 ## License
 ```
