@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Pizza App Compose</string>
+    <string name="search_hint">Find what you want …</string>
+
+
+    <!--region Formats-->
+    <string name="format_price">$ %.2f</string>
+    <!--endregion-->
+</resources>
