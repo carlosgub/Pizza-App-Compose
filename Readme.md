@@ -1,4 +1,4 @@
-# Pizza App Compose :rocket:
+# Pizza App Compose :pizza:
 ## Description :scroll: 
 Mock for Pizza App, this is currently in construccion
 
