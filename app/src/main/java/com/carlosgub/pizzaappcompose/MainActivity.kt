@@ -31,11 +31,13 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
 import com.carlosgub.pizzaappcompose.data.DataDummy
 import com.carlosgub.pizzaappcompose.model.Pizza
 import com.carlosgub.pizzaappcompose.ui.theme.*
@@ -361,23 +363,25 @@ fun PizzaHotPromo() {
                     modifier = Modifier
                         .padding(top = 4.dp, end = 8.dp, bottom = 12.dp)
                 ) {
-//                        val price = stringResource(R.string.format_price, 7.98)
-//                        Text(
-//                            text = price,
-//                            style = MaterialTheme.typography.body2.copy(
-//                                color = Gray100,
-//                                fontWeight = FontWeight.Bold
-//                            )
-//                        )
+                    val price2 = stringResource(R.string.format_price, 7.98)
+                    Text(
+                        text = price2,
+                        style = MaterialTheme.typography.body2.copy(
+                            color = GrayDiscount,
+                            textDecoration = TextDecoration.LineThrough,
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
                     val priceDiscount = stringResource(R.string.format_price, 5.98)
                     Text(
                         text = priceDiscount,
                         style = MaterialTheme.typography.body2.copy(
                             color = Color.White,
                             fontWeight = FontWeight.Bold
-                        )
+                        ),
+                        modifier = Modifier
+                            .padding(4.dp)
                     )
-
                     Spacer(
                         modifier = Modifier
                             .weight(1f)
