@@ -13,10 +13,9 @@ I used this design from UpLabs: https://www.uplabs.com/posts/pizza-store-apps
 
 ## Dependencies :clipboard:
 
-- androidx.compose.ui:ui[version: '1.0.0-beta01'](https://mvnrepository.com/artifact/androidx.compose.ui/ui)
+- androidx.compose.ui:ui [version: '1.0.0-beta01'](https://mvnrepository.com/artifact/androidx.compose.ui/ui)
 - androidx.compose.ui:ui-tooling [version: '1.0.0-beta01'](https://mvnrepository.com/artifact/androidx.compose.ui/ui-tooling)
 - androidx.compose.material:material [version: '1.0.0-beta01'](https://mvnrepository.com/artifact/androidx.compose.material/material)
-- androidx.constraintlayout:constraintlayout-compose [version: '1.0.0-alpha03'](https://mvnrepository.com/artifact/androidx.constraintlayout/constraintlayout-compose)
 
 ## References :blue_book:
 
