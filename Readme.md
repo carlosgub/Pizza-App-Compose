@@ -47,6 +47,7 @@ limitations under the License.
 <table>
   <tr>
     <td align="center"><a href="https://github.com/carlosgub"><img src="https://avatars1.githubusercontent.com/u/30916886?s=460&v=4" width="100px;" alt=""/><br /><sub><b>Carlos Ugaz</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Bruno125"><img src="https://avatars.githubusercontent.com/u/5692387?s=400&u=eb25d108e52a1a45cd51d3f87e9d8e7c3782e25e&v=4" width="100px;" alt=""/><br /><sub><b>Bruno Aybar</b></sub></a><br /></td>
   </tr>
 </table>
 
