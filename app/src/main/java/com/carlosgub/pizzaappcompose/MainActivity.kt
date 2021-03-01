@@ -1,6 +1,7 @@
 package com.carlosgub.pizzaappcompose
 
 import android.os.Bundle
+import android.widget.Space
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.*
@@ -308,12 +309,11 @@ fun PizzaHotPromo() {
                 modifier = Modifier
                     .size(height = 160.dp, width = 160.dp)
             )
-            ConstraintLayout(
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight()
             ) {
-                val (name, category, daysLeft, price) = createRefs()
                 Text(
                     text = "Pizza Beef Cheese",
                     style = MaterialTheme.typography.body2.copy(
@@ -321,9 +321,7 @@ fun PizzaHotPromo() {
                         fontWeight = FontWeight.Bold
                     ),
                     modifier = Modifier
-                        .constrainAs(name) {
-                            top.linkTo(parent.top, margin = 6.dp)
-                        }
+                        .padding(top = 6.dp)
                 )
                 Text(
                     text = "Pizza",
@@ -331,17 +329,13 @@ fun PizzaHotPromo() {
                         color = Color.White
                     ),
                     modifier = Modifier
-                        .constrainAs(category) {
-                            top.linkTo(name.bottom, margin = 4.dp)
-                        }
+                        .padding(top = 4.dp)
                 )
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .constrainAs(daysLeft) {
-                            top.linkTo(category.bottom, margin = 4.dp)
-                        }
+                        .padding(top = 4.dp)
                 ) {
                     CreateIcon(
                         iconResource = painterResource(id = R.drawable.ic_clock),
@@ -358,19 +352,15 @@ fun PizzaHotPromo() {
                             .padding(top = 4.dp, start = 4.dp)
                     )
                 }
+                Spacer(
+                    modifier = Modifier
+                        .weight(1f)
+                )
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
-                        .constrainAs(price) {
-                            bottom.linkTo(parent.bottom)
-                        }
-                        .fillMaxWidth()
                         .padding(top = 4.dp, end = 8.dp, bottom = 12.dp)
                 ) {
-                    Row(
-                        modifier = Modifier
-                            .weight(1f)
-                    ) {
 //                        val price = stringResource(R.string.format_price, 7.98)
 //                        Text(
 //                            text = price,
@@ -379,17 +369,19 @@ fun PizzaHotPromo() {
 //                                fontWeight = FontWeight.Bold
 //                            )
 //                        )
-                        val priceDiscount = stringResource(R.string.format_price, 5.98)
-                        Text(
-                            text = priceDiscount,
-                            style = MaterialTheme.typography.body2.copy(
-                                color = Color.White,
-                                fontWeight = FontWeight.Bold
-                            ),
-                            modifier = Modifier
-                                .padding(start = 4.dp)
+                    val priceDiscount = stringResource(R.string.format_price, 5.98)
+                    Text(
+                        text = priceDiscount,
+                        style = MaterialTheme.typography.body2.copy(
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold
                         )
-                    }
+                    )
+
+                    Spacer(
+                        modifier = Modifier
+                            .weight(1f)
+                    )
                     val button = painterResource(id = R.drawable.ic_button_plus_white)
                     Image(
                         painter = button,
