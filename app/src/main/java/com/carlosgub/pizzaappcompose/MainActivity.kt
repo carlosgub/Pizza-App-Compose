@@ -13,6 +13,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
+import androidx.compose.material.TextFieldDefaults.textFieldColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -25,6 +26,7 @@ import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -127,6 +129,7 @@ fun BodyApp() {
 fun Search(modifier: Modifier = Modifier) {
     val (query, setQuery) = remember { mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
+    val focusManager = LocalFocusManager.current
     TextField(
         placeholder = {
             Text(
@@ -146,8 +149,8 @@ fun Search(modifier: Modifier = Modifier) {
             .padding(top = 12.dp, bottom = 16.dp, start = 12.dp, end = 12.dp)
             .fillMaxWidth()
             .clip(RoundedCornerShape(14.dp))
-            .focusModifier()
-            .background(Color.White),
+            .focusModifier(),
+        colors = textFieldColors(backgroundColor = Color.White),
         value = query,
         onValueChange = {
             setQuery(it)
@@ -157,6 +160,7 @@ fun Search(modifier: Modifier = Modifier) {
         keyboardActions = KeyboardActions(
             onDone = {
                 keyboardController?.hideSoftwareKeyboard()
+                focusManager.clearFocus()
             },
         )
     )
